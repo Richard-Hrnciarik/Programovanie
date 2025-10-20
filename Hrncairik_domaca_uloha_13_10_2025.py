@@ -11,7 +11,7 @@ def otvor_canvas2():
     #vytvori novy canvas v tomto okne
     canvas2 = tk.Canvas(frame, width = 400, height = 300, bg = 'lightyellow', scrollregion = (0, 0, 800,  1200))
     canvas2.pack(side = 'left', fill = 'both', expand = True)
-
+    '''
     #vertikalny scrollbar
     v_scroll = tk.Scrollbar(frame, orient = 'vertical', command = canvas2.yview)
     v_scroll.pack(side = 'right', fill = 'y')
@@ -48,6 +48,36 @@ def otvor_canvas2():
 
     scale2 = tk.Scale(from_=10, to=200, orient='vertical',length=400, command=zmena2)
     scale2.place(x=550, y=0)
+    scale2.set(ry)'''
+
+    def kruh():
+        global rx, ry, x, y
+        rx, ry = 200, 100
+        x, y = 300, 200
+
+    kruh()
+
+    canvas2.create_oval(x-rx, y-ry, x+rx, y+ry, width=5, outline='green',tags='oval')
+
+    def zmena1(event):
+        global rx
+        rx = scale1.get()
+        prekresli()
+
+    def zmena2(event):
+        global ry
+        ry = scale2.get()
+        prekresli()
+
+    def prekresli():
+        canvas2.coords('oval',[x-rx, y-ry, x+rx, y+ry])
+
+    scale1 = tk.Scale(frame, from_=10, to=200, orient='horizontal',length=600, command=zmena1)
+    scale1.pack()
+    scale1.set(rx)
+
+    scale2 = tk.Scale(frame, from_=10, to=200, orient='vertical',length=400, command=zmena2)
+    scale2.place(x=550, y=0)
     scale2.set(ry)
 
 #--------------------------------------------------------------------------------------------
@@ -76,6 +106,8 @@ def otvor_canvas3():
         radiobutton4 = tk.Radiobutton(text='text', variable=v, value=4)
         radiobutton4.pack()
 
+    stvorec()
+
 #--------------------------------------------------------------------------------------------
 
 def otvor_canvas4():
@@ -83,25 +115,28 @@ def otvor_canvas4():
     okno4 = tk.Toplevel(root)
     okno4.title('Canvas 4')
 
+    frame = tk.Frame(okno4)
+    frame.pack(fill = 'both', expand = True)
+
     #vytvori novy canvas v tomto okne
-    canvas4 = tk.Canvas(okno4, width = 400, height = 300, bg = 'lightyellow')
-    canvas4.pack(padx = 10, pady = 10)
+    canvas4 = tk.Canvas(frame, width = 400, height = 300, bg = 'lightyellow', scrollregion = (0, 0, 800,  1200))
+    canvas4.pack(side = 'left', fill = 'both', expand = True)
 
     v = tk.IntVar()
 
-    radiobutton1 = tk.Radiobutton(text='kruh', variable=v, value=1)
+    radiobutton1 = tk.Radiobutton(frame, text='kruh', variable=v, value=1)
     radiobutton1.pack()
 
-    radiobutton2 = tk.Radiobutton(text='štvorec', variable=v, value=2)
+    radiobutton2 = tk.Radiobutton(frame, text='štvorec', variable=v, value=2)
     radiobutton2.pack()
 
-    radiobutton3 = tk.Radiobutton(text='čiara', variable=v, value=3)
+    radiobutton3 = tk.Radiobutton(frame, text='čiara', variable=v, value=3)
     radiobutton3.pack()
 
-    radiobutton4 = tk.Radiobutton(text='text', variable=v, value=4)
+    radiobutton4 = tk.Radiobutton(frame, text='text', variable=v, value=4)
     radiobutton4.pack()
 
-    def klik(sur):
+    '''def klik(sur):
         typ = v.get()
         if typ == 1:
             canvas4.create_oval(sur.x-10, sur.y-10, sur.x+10, sur.y+10)
@@ -182,7 +217,7 @@ def otvor_canvas4():
     checkbutton3 = tk.Checkbutton(text='nemecký jazyk', onvalue='NJ',offvalue='', variable=predmet3, command=vypis)
     checkbutton3.pack(anchor='w')
 
-    canvas4.bind('<Button-1>', klik)
+    canvas4.bind('<Button-1>', klik)'''
 
 #--------------------------------------------------------------------------------------------
 
